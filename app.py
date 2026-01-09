@@ -64,9 +64,6 @@ def admin():
     </body>""", d=site_data)
 
 if __name__ == '__main__':
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(('', 0))
-    port = s.getsockname()[1]
-    s.close()
-    print(f"PORT: {port}")
-    app.run(host='0.0.0.0', port=port)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
+
