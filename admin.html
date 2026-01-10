@@ -2,40 +2,52 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>SADRAZAM | PANEL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADRAZAM | ADMIN LOGIN</title>
     <style>
-        body { background: #000; color: #ff0000; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .login-box { border: 2px solid #ff0000; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px #ff0000; }
-        input { background: #111; border: 1px solid #ff0000; color: #fff; padding: 10px; width: 100%; margin: 10px 0; box-sizing: border-box; }
-        button { background: #ff0000; color: #fff; border: none; padding: 10px 20px; width: 100%; font-weight: bold; cursor: pointer; }
-        #panel { display: none; }
+        body { background: #000; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: monospace; }
+        .login-card { border: 2px solid #f00; padding: 40px; border-radius: 15px; box-shadow: 0 0 20px #f00; text-align: center; background: #000; width: 300px; }
+        h2 { color: #f00; font-size: 18px; margin-bottom: 20px; letter-spacing: 2px; }
+        input { background: #111; border: 1px solid #444; color: #fff; padding: 12px; width: 100%; margin-bottom: 20px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: #f00; }
+        button { background: #f00; color: #fff; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #b00; box-shadow: 0 0 10px #f00; }
+        #admin-panel { display: none; color: #fff; }
     </style>
 </head>
 <body>
-    <div id="login" class="login-box">
-        <h3>SECURE ADMIN LOGIN</h3>
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="login()">LOGIN</button>
+
+    <div id="login-area" class="login-card">
+        <h2>SECURE ADMIN LOGIN</h2>
+        <input type="password" id="adminPass" placeholder="Password">
+        <button onclick="checkAccess()">LOGIN</button>
     </div>
 
-    <div id="panel" class="login-box">
-        <h3>SADRAZAM CONTROL</h3>
-        <p>Aga, statik sistemde olduğumuz için buradaki değişikliği kalıcı yapmak için yine push lazım. Ama hızlı düzenleme kodun hazır:</p>
-        <textarea id="copyCode" rows="5" style="width:100%; background:#000; color:#00ff00; border:1px solid #00ff00;">git add . && git commit -m "tarih guncellendi" && git push</textarea>
-        <button onclick="copy()">KOMUTU KOPYALA</button>
+    <div id="admin-panel" class="login-card">
+        <h2>SADRAZAM CONTROL</h2>
+        <p style="font-size: 12px; color: #888;">Erişim Başarılı. Güncelleme komutu hazır:</p>
+        <textarea id="cmd" style="width:100%; background:#111; color:#0f0; border:1px solid #333; font-size:10px;">git add . && git commit -m "op update" && git push</textarea>
+        <button onclick="copyCmd()" style="margin-top:10px; background:#222; border:1px solid #f00;">KOMUTU KOPYALA</button>
+        <button onclick="location.reload()" style="margin-top:10px; background:transparent; font-size:10px;">ÇIKIŞ YAP</button>
     </div>
 
     <script>
-        function login() {
-            if(document.getElementById('pass').value === 'sadrazam123') { // Şifren bu
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('panel').style.display = 'block';
-            } else { alert('HATALI ŞİFRE!'); }
+        function checkAccess() {
+            const passInput = document.getElementById('adminPass').value;
+            // Şifren: sadrazam123
+            if (passInput === 'sadrazam123') {
+                document.getElementById('login-area').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert('YETKİSİZ ERİŞİM: Şifre Hatalı!');
+            }
         }
-        function copy() {
-            document.getElementById('copyCode').select();
-            document.execCommand('copy');
-            alert('Aga komut kopyalandı, Termux'a yapıştır!');
+
+        function copyCmd() {
+            const copyText = document.getElementById("cmd");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Komut kopyalandı! Termux'a yapıştır aga.");
         }
     </script>
 </body>
