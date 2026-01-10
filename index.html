@@ -3,48 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADRAZAM | OPS CENTER</title>
+    <title>SADRAZAM | COMMAND CENTER</title>
     <style>
-        body { background: #050505; color: #e0e0e0; font-family: sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { max-width: 600px; width: 100%; background: #0a0a0a; border: 1px solid #333; padding: 30px; border-radius: 4px; position: relative; box-shadow: 0 0 20px rgba(255,0,0,0.2); }
-        .red-header { color: #ff0000; text-align: center; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 10px #f00; }
-        .op-box { background: #111; border: 1px dashed #444; padding: 15px; margin: 20px 0; border-radius: 4px; }
-        .op-title { color: #ff0000; font-weight: bold; font-size: 14px; margin-bottom: 10px; display: block; }
-        .bio { line-height: 1.8; border-left: 3px solid #ff0000; padding-left: 15px; margin-bottom: 25px; text-align: justify; }
-        .highlight { color: #ff0000; font-weight: bold; }
-        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #333; color: #fff; box-sizing: border-box; outline: none; }
-        input:focus { border-color: #ff0000; }
-        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); transition: 0.3s; }
-        button:hover { background: #b30000; box-shadow: 0 0 15px #f00; }
-        .op-info { display: flex; justify-content: space-between; font-family: monospace; color: #00ff00; }
+        body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; overflow-x: hidden; }
+        .container { max-width: 800px; width: 100%; background: rgba(5, 5, 5, 0.95); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 30px rgba(255,0,0,0.1); }
+        .red-header { color: #ff0000; text-align: center; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 15px #f00; font-size: 2.5em; animation: glitch 2s infinite; }
+        
+        /* Canlı Takip Paneli */
+        .live-panel { background: #000; border: 1px solid #333; padding: 10px; font-size: 12px; margin-bottom: 20px; height: 100px; overflow: hidden; position: relative; color: #00ff00; }
+        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+        .alert-red { color: #ff0000; font-weight: bold; text-transform: uppercase; }
+
+        .bio { line-height: 1.6; border-left: 3px solid #ff0000; padding-left: 15px; margin-bottom: 25px; font-size: 14px; color: #bbb; }
+        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #050505; border: 1px solid #444; color: #fff; box-sizing: border-box; outline: none; }
+        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 20px #f00; }
+
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-2deg); }
+            40% { transform: skew(2deg); }
+            100% { transform: skew(0deg); }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1 class="red-header">SADRAZAM</h1>
+
+        <div class="live-panel" id="logPanel">
+            <div class="log-entry">[ SYSTEM ] Operasyon Merkezi Başlatıldı...</div>
+        </div>
         
         <div class="bio">
-            Biz kimiz? Biz, dijital dünyanın gölgelerinde yürüyen, <span class="highlight">Instagram tabanlı güvenlik açıklarını</span> manipüle eden ve sistemleri kendi kurallarımızla yöneten bir oluşumuz. Sosyal medya platformlarındaki haksızlıklara karşı <span class="highlight">hesap kapatma operasyonları</span> yürütüyor, altyapısı zayıf sistemlere <span class="highlight">yüksek ölçekli DDoS saldırıları</span> düzenliyoruz.
+            Gölge dünyasında kurallar basittir: <span style="color:#ff0000">Ya av olursun ya da avcı.</span> Sadrazam Operasyon Merkezi, dijital adaleti sağlamak için burada. DDoS, sızma testleri ve hesap güvenlik operasyonları aktif.
         </div>
 
-        <div class="op-box">
-            <span class="op-title">[ GELECEK OPERASYON BİLGİSİ ]</span>
-            <div class="op-info">
-                <span>GÜN: 11.01.2026</span>
-                <span>SAAT: 23:00 (GMT+3)</span>
-            </div>
-            <div style="margin-top:10px; font-size: 12px; color: #888;">HEDEF: Gizli Operasyon / Instagram Data Leak Test</div>
-        </div>
-
-        <h3 style="color: #ff0000; text-align: center; text-transform: uppercase;">Operasyon Talebi</h3>
-        
         <form action="https://formspree.io/f/xjggbewe" method="POST">
             <input type="email" name="email" placeholder="E-posta Adresiniz" required>
             <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
-            <textarea name="message" rows="4" placeholder="Operasyon Detaylarını Yazın (Neden bu hedef?)" required></textarea>
+            <textarea name="message" rows="4" placeholder="Operasyon Detayları..." required></textarea>
             <button type="submit">SİSTEME İLET</button>
         </form>
     </div>
+
+    <script>
+        // Sesli Karşılama
+        window.addEventListener('click', function() {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = "System Authorized. Welcome Sadrazam.";
+            msg.lang = 'en-US';
+            msg.pitch = 0.1; // Derin hacker sesi
+            msg.rate = 0.8;
+            window.speechSynthesis.speak(msg);
+        }, { once: true }); // İlk tıklamada bir kez çalışır (Tarayıcı kuralı gereği tıklama şart)
+
+        const logPanel = document.getElementById('logPanel');
+        
+        function addLog(text, isAlert = false) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry' + (isAlert ? ' alert-red' : '');
+            const now = new Date().toLocaleTimeString();
+            entry.innerHTML = `[ ${now} ] ${text}`;
+            logPanel.prepend(entry);
+        }
+
+        // Rastgele IP Akışı
+        setInterval(() => {
+            const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+            addLog(`Giriş Denemesi Engellendi: ${ip}`);
+        }, 30000); // 30 saniyede bir IP düşer
+
+        // 2 Dakikada bir Saldırı Engellendi
+        setInterval(() => {
+            addLog("!!! KRİTİK: DIŞ SALDIRI ENGELLENDİ !!!", true);
+        }, 120000);
+
+        // 15 Dakikada bir Veri Sızıntısı
+        setInterval(() => {
+            addLog(">>> SİSTEM UYARISI: HEDEF VERİ SIZINTISI TAMAMLANDI <<<", true);
+        }, 900000);
+    </script>
 </body>
 </html>
-
