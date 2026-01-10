@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>SADRAZAM | PANEL</title>
+    <style>
+        body { background: #000; color: #ff0000; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-box { border: 2px solid #ff0000; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px #ff0000; }
+        input { background: #111; border: 1px solid #ff0000; color: #fff; padding: 10px; width: 100%; margin: 10px 0; box-sizing: border-box; }
+        button { background: #ff0000; color: #fff; border: none; padding: 10px 20px; width: 100%; font-weight: bold; cursor: pointer; }
+        #panel { display: none; }
+    </style>
+</head>
+<body>
+    <div id="login" class="login-box">
+        <h3>SECURE ADMIN LOGIN</h3>
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="login()">LOGIN</button>
+    </div>
+
+    <div id="panel" class="login-box">
+        <h3>SADRAZAM CONTROL</h3>
+        <p>Aga, statik sistemde olduğumuz için buradaki değişikliği kalıcı yapmak için yine push lazım. Ama hızlı düzenleme kodun hazır:</p>
+        <textarea id="copyCode" rows="5" style="width:100%; background:#000; color:#00ff00; border:1px solid #00ff00;">git add . && git commit -m "tarih guncellendi" && git push</textarea>
+        <button onclick="copy()">KOMUTU KOPYALA</button>
+    </div>
+
+    <script>
+        function login() {
+            if(document.getElementById('pass').value === 'sadrazam123') { // Şifren bu
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('panel').style.display = 'block';
+            } else { alert('HATALI ŞİFRE!'); }
+        }
+        function copy() {
+            document.getElementById('copyCode').select();
+            document.execCommand('copy');
+            alert('Aga komut kopyalandı, Termux'a yapıştır!');
+        }
+    </script>
+</body>
+</html>
+
