@@ -6,7 +6,7 @@
     <title>SADRAZAM | COMMAND CENTER</title>
     <style>
         body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; overflow-x: hidden; }
-        .container { max-width: 800px; width: 100%; background: rgba(0, 0, 0, 0.9); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 40px rgba(255,0,0,0.15); z-index: 10; }
+        .container { max-width: 800px; width: 100%; background: rgba(0, 0, 0, 0.95); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 40px rgba(255,0,0,0.2); z-index: 10; }
         .red-header { color: #ff0000; text-align: center; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 20px #f00; font-size: 2.8em; animation: glitch 1.5s infinite; }
         
         .live-panel { background: #000; border: 1px solid #444; padding: 10px; font-size: 13px; margin-bottom: 20px; height: 120px; overflow: hidden; position: relative; color: #00ff00; }
@@ -15,8 +15,8 @@
 
         .bio { line-height: 1.6; border-left: 4px solid #ff0000; padding-left: 20px; margin-bottom: 25px; font-size: 15px; color: #ccc; }
         input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #ff000044; color: #fff; box-sizing: border-box; outline: none; }
-        button { width: 100%; padding: 18px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.4s; letter-spacing: 3px; font-size: 16px; box-shadow: 0 0 10px #ff000055; }
-        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 25px #f00; transform: scale(1.02); }
+        button { width: 100%; padding: 18px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.4s; letter-spacing: 3px; font-size: 16px; }
+        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 25px #f00; }
 
         @keyframes glitch {
             0% { transform: translate(0); }
@@ -26,48 +26,57 @@
         }
     </style>
 </head>
-<body>
-
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+<body onclick="startCenter()"> <audio id="bgMusic" loop>
+        <source src="https://www.soundjay.com/communication/sounds/data-transfer-1.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="container">
         <h1 class="red-header">SADRAZAM</h1>
 
         <div class="live-panel" id="logPanel">
-            <div class="log-entry">[ SYSTEM ] Operasyon Birimleri Aktif Ediliyor...</div>
+            <div class="log-entry">[ SYSTEM ] Operasyon Birimleri Beklemede... (Ekrana Dokun)</div>
         </div>
         
         <div class="bio">
-            Karanlığın içinde, sessizce... <span style="color:#ff0000">SADRAZAM</span> komutasındaki operasyon merkezi tüm dijital ağları kontrol altına alıyor. Hedefleri belirle, gerisini sisteme bırak.
+            Sisteme giriş yapıldı. <span style="color:#ff0000">SADRAZAM</span> komutasındaki operasyon merkezi tüm dijital ağları izliyor. Hedefini seç ve başlat.
         </div>
 
         <form action="https://formspree.io/f/xjggbewe" method="POST">
             <input type="email" name="email" placeholder="E-posta Adresiniz" required>
             <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
-            <textarea name="message" rows="4" placeholder="Operasyon Detaylarını Buraya Gir..." required></textarea>
+            <textarea name="message" rows="4" placeholder="Operasyon Detayları..." required></textarea>
             <button type="submit">OPERASYONU BAŞLAT</button>
         </form>
     </div>
 
     <script>
-        // Sesli Karşılama ve Arka Plan Müziği Aktivasyonu
-        window.addEventListener('click', function() {
-            // Arka plan müziğini başlat
-            const bg = document.getElementById('bgMusic');
-            bg.volume = 0.2; // Müziği kısık sesle çal (Binary Code)
-            bg.play();
+        let started = false;
 
-            // Türkçe Hacker Karşılama Sesi
-            const msg = new SpeechSynthesisUtterance();
-            msg.text = "Sisteme erişim sağlandı. Hoş geldin Sadrazam.";
-            msg.lang = 'tr-TR';
-            msg.pitch = 0.1; // Sesi en kalına çekiyoruz
-            msg.rate = 0.7;  // Daha yavaş ve ağır konuşma
-            msg.volume = 1;
-            window.speechSynthesis.speak(msg);
-        }, { once: true });
+        function startCenter() {
+            if (started) return;
+            started = true;
+
+            // 1. Arka Plan Müziğini Başlat
+            const bg = document.getElementById('bgMusic');
+            bg.volume = 0.3;
+            bg.play().catch(e => console.log("Müzik başlatılamadı"));
+
+            // 2. Türkçe Hacker Sesi (Kalın ve Mekanik)
+            const voice = new SpeechSynthesisUtterance();
+            voice.text = "Sisteme erişim sağlandı. Hoş geldin Sadrazam. Operasyon için emirlerini bekliyorum.";
+            voice.lang = 'tr-TR';
+            
+            // Hacker sesi ayarları
+            voice.pitch = 0.1; // En kalın ses
+            voice.rate = 0.7;  // Yavaş ve tehditkar
+            voice.volume = 1;
+
+            // Bazı cihazlarda sesin yüklenmesi için kısa bir bekleme
+            setTimeout(() => {
+                window.speechSynthesis.speak(voice);
+                addLog("SESLİ YETKİLENDİRME TAMAMLANDI.", true);
+            }, 500);
+        }
 
         const logPanel = document.getElementById('logPanel');
         function addLog(text, isAlert = false) {
@@ -79,15 +88,18 @@
             if(logPanel.childNodes.length > 5) logPanel.removeChild(logPanel.lastChild);
         }
 
-        // Sahte IP ve Saldırı Logları
+        // Log döngüleri
         setInterval(() => {
+            if(!started) return;
             const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
             addLog(`Sızma Girişimi Engellendi: ${ip}`);
         }, 30000);
 
         setInterval(() => {
-            addLog("!!! KRİTİK: GÜVENLİK DUVARI AKTİF - SALDIRI PÜSKÜRTÜLDÜ !!!", true);
+            if(!started) return;
+            addLog("!!! KRİTİK: GÜVENLİK DUVARI AKTİF !!!", true);
         }, 120000);
     </script>
 </body>
 </html>
+
