@@ -6,84 +6,88 @@
     <title>SADRAZAM | COMMAND CENTER</title>
     <style>
         body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; overflow-x: hidden; }
-        .container { max-width: 800px; width: 100%; background: rgba(5, 5, 5, 0.95); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 30px rgba(255,0,0,0.1); }
-        .red-header { color: #ff0000; text-align: center; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 15px #f00; font-size: 2.5em; animation: glitch 2s infinite; }
+        .container { max-width: 800px; width: 100%; background: rgba(0, 0, 0, 0.9); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 40px rgba(255,0,0,0.15); z-index: 10; }
+        .red-header { color: #ff0000; text-align: center; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 20px #f00; font-size: 2.8em; animation: glitch 1.5s infinite; }
         
-        /* Canlı Takip Paneli */
-        .live-panel { background: #000; border: 1px solid #333; padding: 10px; font-size: 12px; margin-bottom: 20px; height: 100px; overflow: hidden; position: relative; color: #00ff00; }
+        .live-panel { background: #000; border: 1px solid #444; padding: 10px; font-size: 13px; margin-bottom: 20px; height: 120px; overflow: hidden; position: relative; color: #00ff00; }
         .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
-        .alert-red { color: #ff0000; font-weight: bold; text-transform: uppercase; }
+        .alert-red { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #f00; }
 
-        .bio { line-height: 1.6; border-left: 3px solid #ff0000; padding-left: 15px; margin-bottom: 25px; font-size: 14px; color: #bbb; }
-        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #050505; border: 1px solid #444; color: #fff; box-sizing: border-box; outline: none; }
-        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
-        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 20px #f00; }
+        .bio { line-height: 1.6; border-left: 4px solid #ff0000; padding-left: 20px; margin-bottom: 25px; font-size: 15px; color: #ccc; }
+        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #ff000044; color: #fff; box-sizing: border-box; outline: none; }
+        button { width: 100%; padding: 18px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.4s; letter-spacing: 3px; font-size: 16px; box-shadow: 0 0 10px #ff000055; }
+        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 25px #f00; transform: scale(1.02); }
 
         @keyframes glitch {
-            0% { transform: skew(0deg); }
-            20% { transform: skew(-2deg); }
-            40% { transform: skew(2deg); }
-            100% { transform: skew(0deg); }
+            0% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); }
+            20% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
     </style>
 </head>
 <body>
 
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
     <div class="container">
         <h1 class="red-header">SADRAZAM</h1>
 
         <div class="live-panel" id="logPanel">
-            <div class="log-entry">[ SYSTEM ] Operasyon Merkezi Başlatıldı...</div>
+            <div class="log-entry">[ SYSTEM ] Operasyon Birimleri Aktif Ediliyor...</div>
         </div>
         
         <div class="bio">
-            Gölge dünyasında kurallar basittir: <span style="color:#ff0000">Ya av olursun ya da avcı.</span> Sadrazam Operasyon Merkezi, dijital adaleti sağlamak için burada. DDoS, sızma testleri ve hesap güvenlik operasyonları aktif.
+            Karanlığın içinde, sessizce... <span style="color:#ff0000">SADRAZAM</span> komutasındaki operasyon merkezi tüm dijital ağları kontrol altına alıyor. Hedefleri belirle, gerisini sisteme bırak.
         </div>
 
         <form action="https://formspree.io/f/xjggbewe" method="POST">
             <input type="email" name="email" placeholder="E-posta Adresiniz" required>
             <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
-            <textarea name="message" rows="4" placeholder="Operasyon Detayları..." required></textarea>
-            <button type="submit">SİSTEME İLET</button>
+            <textarea name="message" rows="4" placeholder="Operasyon Detaylarını Buraya Gir..." required></textarea>
+            <button type="submit">OPERASYONU BAŞLAT</button>
         </form>
     </div>
 
     <script>
-        // Sesli Karşılama
+        // Sesli Karşılama ve Arka Plan Müziği Aktivasyonu
         window.addEventListener('click', function() {
+            // Arka plan müziğini başlat
+            const bg = document.getElementById('bgMusic');
+            bg.volume = 0.2; // Müziği kısık sesle çal (Binary Code)
+            bg.play();
+
+            // Türkçe Hacker Karşılama Sesi
             const msg = new SpeechSynthesisUtterance();
-            msg.text = "System Authorized. Welcome Sadrazam.";
-            msg.lang = 'en-US';
-            msg.pitch = 0.1; // Derin hacker sesi
-            msg.rate = 0.8;
+            msg.text = "Sisteme erişim sağlandı. Hoş geldin Sadrazam.";
+            msg.lang = 'tr-TR';
+            msg.pitch = 0.1; // Sesi en kalına çekiyoruz
+            msg.rate = 0.7;  // Daha yavaş ve ağır konuşma
+            msg.volume = 1;
             window.speechSynthesis.speak(msg);
-        }, { once: true }); // İlk tıklamada bir kez çalışır (Tarayıcı kuralı gereği tıklama şart)
+        }, { once: true });
 
         const logPanel = document.getElementById('logPanel');
-        
         function addLog(text, isAlert = false) {
             const entry = document.createElement('div');
             entry.className = 'log-entry' + (isAlert ? ' alert-red' : '');
             const now = new Date().toLocaleTimeString();
             entry.innerHTML = `[ ${now} ] ${text}`;
             logPanel.prepend(entry);
+            if(logPanel.childNodes.length > 5) logPanel.removeChild(logPanel.lastChild);
         }
 
-        // Rastgele IP Akışı
+        // Sahte IP ve Saldırı Logları
         setInterval(() => {
             const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
-            addLog(`Giriş Denemesi Engellendi: ${ip}`);
-        }, 30000); // 30 saniyede bir IP düşer
+            addLog(`Sızma Girişimi Engellendi: ${ip}`);
+        }, 30000);
 
-        // 2 Dakikada bir Saldırı Engellendi
         setInterval(() => {
-            addLog("!!! KRİTİK: DIŞ SALDIRI ENGELLENDİ !!!", true);
+            addLog("!!! KRİTİK: GÜVENLİK DUVARI AKTİF - SALDIRI PÜSKÜRTÜLDÜ !!!", true);
         }, 120000);
-
-        // 15 Dakikada bir Veri Sızıntısı
-        setInterval(() => {
-            addLog(">>> SİSTEM UYARISI: HEDEF VERİ SIZINTISI TAMAMLANDI <<<", true);
-        }, 900000);
     </script>
 </body>
 </html>
