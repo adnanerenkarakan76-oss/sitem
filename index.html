@@ -3,47 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADRAZAM | OPERATIONS</title>
+    <title>SADRAZAM | OPS CENTER</title>
     <style>
-        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .container { max-width: 600px; width: 90%; background: rgba(15, 15, 15, 0.95); border: 1px solid #333; padding: 40px; border-radius: 5px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.1); position: relative; }
-        .red-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #ff0000, transparent); }
-        h1 { color: #ff0000; font-size: 28px; text-transform: uppercase; letter-spacing: 5px; text-align: center; margin-bottom: 30px; text-shadow: 2px 2px 5px #000; }
-        .bio-section { line-height: 1.8; font-size: 16px; text-align: justify; border-left: 2px solid #ff0000; padding-left: 20px; margin-bottom: 30px; }
-        .highlight { color: #ff0000; font-weight: bold; }
-        .stats { display: flex; justify-content: space-around; border-top: 1px solid #222; padding-top: 20px; }
-        .stat-item { text-align: center; }
-        .stat-val { display: block; color: #ff0000; font-size: 20px; font-weight: bold; }
-        .stat-label { font-size: 12px; color: #666; text-transform: uppercase; }
-        .contact-btn { display: block; width: 100%; text-align: center; background: #ff0000; color: #fff; padding: 15px; text-decoration: none; font-weight: bold; margin-top: 20px; transition: 0.3s; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); }
-        .contact-btn:hover { background: #b30000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+        body { background: #050505; color: #e0e0e0; font-family: sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 600px; width: 100%; background: #0a0a0a; border: 1px solid #333; padding: 30px; border-radius: 4px; position: relative; }
+        .red-header { color: #ff0000; text-align: center; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 25px; }
+        .op-box { background: #111; border: 1px dashed #444; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .op-title { color: #ff0000; font-weight: bold; font-size: 14px; margin-bottom: 10px; display: block; }
+        .bio { line-height: 1.6; border-left: 3px solid #ff0000; padding-left: 15px; margin-bottom: 25px; }
+        
+        /* Form Stil */
+        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #333; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); }
+        
+        .op-info { display: flex; justify-content: space-between; font-family: monospace; color: #00ff00; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="red-line"></div>
-        <h1>SADRAZAM</h1>
+        <h1 class="red-header">SADRAZAM</h1>
         
-        <div class="bio-section">
-            Biz kimiz? Biz, dijital dünyanın gölgelerinde yürüyen, <span class="highlight">Instagram tabanlı güvenlik açıklarını</span> manipüle eden ve sistemleri kendi kurallarımızla yöneten bir oluşumuz. Sosyal medya platformlarındaki haksızlıklara karşı <span class="highlight">hesap kapatma operasyonları</span> yürütüyor, altyapısı zayıf sistemlere <span class="highlight">yüksek ölçekli DDoS saldırıları</span> düzenliyoruz. Biz bir isim değil, bir dijital otoriteyiz.
+        <div class="bio">
+            Instagram hesap kapatma ve altyapı manipülasyonu üzerine uzmanlaşmış dijital otorite. 
+            Sistemlerimiz, belirlenen hedefleri etkisiz hale getirmek için 7/24 aktiftir.
         </div>
 
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-val">450+</span>
-                <span class="stat-label">Terminated Acc</span>
+        <div class="op-box">
+            <span class="op-title">[ GELECEK OPERASYON BİLGİSİ ]</span>
+            <div class="op-info">
+                <span>GÜN: 12.01.2026</span>
+                <span>SAAT: 22:00 (GMT+3)</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-val">1.2 Tbps</span>
-                <span class="stat-label">DDoS Peak</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-val">Stable</span>
-                <span class="stat-label">System Status</span>
-            </div>
+            <div style="margin-top:10px; font-size: 12px; color: #888;">HEDEF: Gizli Operasyon / DDoS-Shield Bypass</div>
         </div>
 
-        <a href="#" class="contact-btn">OPERASYON TALEBİ GÖNDER</a>
+        <h3 style="color: #ff0000; text-align: center;">OPERASYON TALEBİ</h3>
+        
+        <form action="https://formspree.io/f/mnnnzvgz" method="POST">
+            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+            <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
+            <textarea name="message" rows="4" placeholder="Operasyon Detaylarını Yazın (Neden kapatılmalı?)" required></textarea>
+            <input type="hidden" name="_next" value="https://sadrazam.onrender.com">
+            <button type="submit">SİSTEME İLET</button>
+        </form>
     </div>
 </body>
 </html>
+
