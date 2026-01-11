@@ -3,44 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SADRAZAM | OPS CENTER</title>
+    <title>SADRAZAM | COMMAND CENTER</title>
     <style>
-        body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { max-width: 800px; width: 100%; background: #000; border: 1px solid #ff0000; padding: 30px; box-shadow: 0 0 20px #f003; }
-        .red-header { color: #ff0000; text-align: center; letter-spacing: 10px; text-transform: uppercase; text-shadow: 0 0 15px #f00; }
-        .live-panel { background: #080808; border: 1px solid #333; padding: 10px; font-size: 12px; height: 100px; overflow: hidden; color: #00ff00; margin: 20px 0; }
-        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #444; color: #fff; outline: none; }
-        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .log-entry { margin-bottom: 5px; }
+        body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; overflow-x: hidden; }
+        .container { max-width: 800px; width: 100%; background: rgba(5, 5, 5, 0.95); border: 1px solid #ff0000; padding: 30px; border-radius: 2px; position: relative; box-shadow: 0 0 40px rgba(255,0,0,0.3); z-index: 10; }
+        .red-header { color: #ff0000; text-align: center; letter-spacing: 12px; text-transform: uppercase; margin-bottom: 25px; text-shadow: 0 0 20px #f00; font-size: 3em; animation: glitch 1.5s infinite; }
+        
+        /* Canlı Log Paneli */
+        .live-panel { background: #000; border: 1px solid #444; padding: 12px; font-size: 13px; margin-bottom: 20px; height: 130px; overflow: hidden; position: relative; color: #00ff00; border-left: 3px solid #ff0000; }
+        .log-entry { margin-bottom: 6px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+        .alert-red { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #f00; }
+
+        /* Otorite Metni */
+        .bio { line-height: 1.8; border-left: 4px solid #ff0000; padding-left: 20px; margin-bottom: 30px; font-size: 16px; color: #ccc; text-align: justify; }
+        .highlight { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #f00; }
+
+        input, textarea { width: 100%; padding: 15px; margin-top: 15px; background: #000; border: 1px solid #333; color: #fff; box-sizing: border-box; outline: none; border-bottom: 2px solid #ff000033; }
+        input:focus { border-bottom: 2px solid #ff0000; }
+        
+        button { width: 100%; padding: 20px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.4s; letter-spacing: 4px; font-size: 18px; text-transform: uppercase; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); }
+        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 30px #f00; transform: scale(1.02); }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); }
+            20% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
     </style>
 </head>
-<body onclick="startSys()">
-    <audio id="bgAud" loop><source src="https://www.soundjay.com/communication/sounds/data-transfer-1.mp3"></audio>
+<body onclick="startOperation()">
+
+    <audio id="hackerAudio" loop>
+        <source src="https://www.soundjay.com/communication/sounds/data-transfer-1.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
         <h1 class="red-header">SADRAZAM</h1>
-        <div class="live-panel" id="logP"><div>[ SYSTEM ] Beklemede... Ekrana Dokun.</div></div>
+
+        <div class="live-panel" id="logPanel">
+            <div class="log-entry">[ SYSTEM ] YETKİ KONTROLÜ YAPILIYOR... (EKRANA DOKUNUN)</div>
+        </div>
+        
+        <div class="bio">
+            Biz kimiz? Biz, dijital dünyanın gölgelerinde yürüyen, <span class="highlight">SADRAZAM</span> komutasındaki en üst düzey otoriteyiz. Sosyal medya platformlarındaki adaletsizliklere karşı operasyonlar yürüten, sistemleri kendi kurallarıyla yöneten bir oluşumuz. <span class="highlight">Biz sadece bir grup değil, bir otoriteyiz.</span> Haksızlıklara karşı hesap kapatma, sızma ve veri manipülasyonu operasyonlarımızla dijital evrende dengeyi sağlıyoruz. Bizimle iletişime geçtiğinde, geri dönüşü olmayan bir süreci başlatmış olursun.
+        </div>
+
+        <h3 style="color: #ff0000; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Operasyon Talebi</h3>
+        
         <form action="https://formspree.io/f/xjggbewe" method="POST">
-            <input type="email" name="email" placeholder="E-posta" required>
-            <input type="text" name="target" placeholder="Hedef" required>
-            <textarea name="message" rows="4" placeholder="Detaylar..." required></textarea>
-            <button type="submit">SİSTEME İLET</button>
+            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+            <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
+            <textarea name="message" rows="5" placeholder="Operasyon Detayları: Neden bu hedef seçildi? Otorite onayı için açıklama yapın." required></textarea>
+            <button type="submit">OPERASYONU BAŞLAT</button>
         </form>
     </div>
+
     <script>
-        let s = false;
-        function startSys() {
-            if(s) return; s = true;
-            document.getElementById('bgAud').play();
-            const v = new SpeechSynthesisUtterance("Sisteme erişim sağlandı. Hoş geldin Sadrazam.");
-            v.lang = 'tr-TR'; v.pitch = 0.1; v.rate = 0.8;
-            window.speechSynthesis.speak(v);
-            setInterval(() => {
-                const ip = Math.floor(Math.random()*255) + ".168.1." + Math.floor(Math.random()*255);
-                const e = document.createElement('div'); e.innerHTML = "[ "+new Date().toLocaleTimeString()+" ] Giriş Engellendi: " + ip;
-                document.getElementById('logP').prepend(e);
-            }, 5000);
+        let isStarted = false;
+
+        function startOperation() {
+            if (isStarted) return;
+            isStarted = true;
+
+            // Arka plan sesini başlat
+            const audio = document.getElementById('hackerAudio');
+            audio.volume = 0.2;
+            audio.play();
+
+            // Kalın Hacker Karşılama Sesi (Türkçe)
+            const speak = new SpeechSynthesisUtterance();
+            speak.text = "Sisteme erişim sağlandı. Otorite doğrulandı. Hoş geldin Sadrazam. Emirlerini bekliyorum.";
+            speak.lang = 'tr-TR';
+            speak.pitch = 0.1; // Çok kalın ses
+            speak.rate = 0.7;  // Ağır ve sert konuşma
+            window.speechSynthesis.speak(speak);
+
+            addLog("OTORİTE DOĞRULANDI: SADRAZAM", true);
         }
+
+        const logPanel = document.getElementById('logPanel');
+        function addLog(text, isAlert = false) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry' + (isAlert ? ' alert-red' : '');
+            const now = new Date().toLocaleTimeString();
+            entry.innerHTML = `[ ${now} ] ${text}`;
+            logPanel.prepend(entry);
+        }
+
+        // Sahte IP ve Saldırı Akışı (Ayarladığın sürelerde)
+        setInterval(() => {
+            if(!isStarted) return;
+            const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.1.101`;
+            addLog(`Sızma Girişimi Tespit Edildi ve Engellendi: ${ip}`);
+        }, 30000); // 30 saniyede bir
+
+        setInterval(() => {
+            if(!isStarted) return;
+            addLog("!!! KRİTİK UYARI: DIŞ KAYNAKLI DDOS SALDIRISI PÜSKÜRTÜLDÜ !!!", true);
+        }, 120000); // 2 dakikada bir
     </script>
 </body>
 </html>
-
