@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADRAZAM | OPS CENTER</title>
+    <style>
+        body { background: #020202; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 800px; width: 100%; background: #000; border: 1px solid #ff0000; padding: 30px; box-shadow: 0 0 20px #f003; }
+        .red-header { color: #ff0000; text-align: center; letter-spacing: 10px; text-transform: uppercase; text-shadow: 0 0 15px #f00; }
+        .live-panel { background: #080808; border: 1px solid #333; padding: 10px; font-size: 12px; height: 100px; overflow: hidden; color: #00ff00; margin: 20px 0; }
+        input, textarea { width: 100%; padding: 12px; margin-top: 10px; background: #000; border: 1px solid #444; color: #fff; outline: none; }
+        button { width: 100%; padding: 15px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .log-entry { margin-bottom: 5px; }
+    </style>
+</head>
+<body onclick="startSys()">
+    <audio id="bgAud" loop><source src="https://www.soundjay.com/communication/sounds/data-transfer-1.mp3"></audio>
+    <div class="container">
+        <h1 class="red-header">SADRAZAM</h1>
+        <div class="live-panel" id="logP"><div>[ SYSTEM ] Beklemede... Ekrana Dokun.</div></div>
+        <form action="https://formspree.io/f/xjggbewe" method="POST">
+            <input type="email" name="email" placeholder="E-posta" required>
+            <input type="text" name="target" placeholder="Hedef" required>
+            <textarea name="message" rows="4" placeholder="Detaylar..." required></textarea>
+            <button type="submit">SİSTEME İLET</button>
+        </form>
+    </div>
+    <script>
+        let s = false;
+        function startSys() {
+            if(s) return; s = true;
+            document.getElementById('bgAud').play();
+            const v = new SpeechSynthesisUtterance("Sisteme erişim sağlandı. Hoş geldin Sadrazam.");
+            v.lang = 'tr-TR'; v.pitch = 0.1; v.rate = 0.8;
+            window.speechSynthesis.speak(v);
+            setInterval(() => {
+                const ip = Math.floor(Math.random()*255) + ".168.1." + Math.floor(Math.random()*255);
+                const e = document.createElement('div'); e.innerHTML = "[ "+new Date().toLocaleTimeString()+" ] Giriş Engellendi: " + ip;
+                document.getElementById('logP').prepend(e);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+

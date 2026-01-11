@@ -1,12 +1,3 @@
-from flask import Flask, render_template_string, request, redirect, session
-
-app = Flask(__name__)
-app.secret_key = "ozel_anahtar_123"
-
-site_data = {
-    'title': '✨ Satisfy Experiments', 
-    'subtitle': 'Global Visual Experience', 
-    'insta_url': 'https://instagram.com/satisfy.experiments', 
     'video_bg': 'https://assets.mixkit.co/videos/preview/mixkit-abstract-fast-motion-of-light-colors-34371-large.mp4',
     'admin_pass': 'admin123',
     'visits': 0
@@ -498,3 +489,12 @@ def home():
     '''
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8082)" > app.py && python app.py
+rm index.html
+nano index.html
+git add . && git commit -m "ops center v2: ses ve panel eklendi" && git push origin main
+rm index.html
+nano index.html
+git add . && git commit -m "sadrazam v3: tam hacker deneyimi" && git push origin main
+rm index.html
+nano indwx.html
+git add . && git commit -m "sadrazam v3: tam hacker deneyimi" && git push origin main 
