@@ -14,98 +14,80 @@
         .bio { line-height: 1.8; border-left: 4px solid #ff0000; padding-left: 20px; margin-bottom: 30px; font-size: 16px; color: #ccc; text-align: justify; }
         .highlight { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #f00; }
         input, textarea { width: 100%; padding: 15px; margin-top: 15px; background: #000; border: 1px solid #333; color: #fff; box-sizing: border-box; outline: none; border-bottom: 2px solid #ff000033; }
-        input:focus { border-bottom: 2px solid #ff0000; }
         button { width: 100%; padding: 20px; background: #ff0000; color: #fff; border: none; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.4s; letter-spacing: 4px; font-size: 18px; text-transform: uppercase; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); }
-        button:hover { background: #fff; color: #ff0000; box-shadow: 0 0 30px #f00; transform: scale(1.02); }
-        @keyframes glitch { 0% { transform: translate(0); } 10% { transform: translate(-2px, 2px); } 20% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+        @keyframes glitch { 0% { transform: translate(0); } 10% { transform: translate(-2px, 2px); } 100% { transform: translate(0); } }
     </style>
 </head>
-<body onclick="initAudio()">
+<body onclick="forceStart()">
 
     <audio id="hackerAudio" loop preload="auto">
-        <source src="https://www.soundjay.com/communication/sounds/data-transfer-1.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2561/2561-preview.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
         <h1 class="red-header">SADRAZAM</h1>
-
         <div class="live-panel" id="logPanel">
-            <div class="log-entry">[ SYSTEM ] YETKİ KONTROLÜ YAPILIYOR... (EKRANA DOKUNUN)</div>
+            <div class="log-entry">[ SYSTEM ] YETKİ KONTROLÜ... SİSTEMİ BAŞLATMAK İÇİN DOKUNUN.</div>
         </div>
         
         <div class="bio">
-            Biz kimiz? Biz, dijital dünyanın gölgelerinde yürüyen, <span class="highlight">SADRAZAM</span> komutasındaki en üst düzey otoriteyiz. Sosyal medya platformlarındaki adaletsizliklere karşı operasyonlar yürüten, sistemleri kendi kurallarıyla yöneten bir oluşumuz. <span class="highlight">Biz sadece bir grup değil, bir otoriteyiz.</span> Haksızlıklara karşı hesap kapatma, sızma ve veri manipülasyonu operasyonlarımızla dijital evrende dengeyi sağlıyoruz. Bizimle iletişime geçtiğinde, geri dönüşü olmayan bir süreci başlatmış olursun.
+            Biz kimiz? Biz, dijital dünyanın gölgelerinde yürüyen, <span class="highlight">SADRAZAM</span> komutasındaki en üst düzey otoriteyiz. Sosyal medya platformlarındaki adaletsizliklere karşı operasyonlar yürüten, sistemleri kendi kurallarıyla yöneten bir oluşumuz.
         </div>
 
-        <h3 style="color: #ff0000; text-align: center; text-transform: uppercase; letter-spacing: 3px;">Operasyon Talebi</h3>
-        
         <form action="https://formspree.io/f/xjggbewe" method="POST">
-            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
-            <input type="text" name="target" placeholder="Hedef Link / Kullanıcı Adı" required>
-            <textarea name="message" rows="5" placeholder="Operasyon Detayları: Neden bu hedef seçildi? Otorite onayı için açıklama yapın." required></textarea>
-            <button type="submit" onmouseover="playBeep()">OPERASYONU BAŞLAT</button>
+            <input type="email" name="email" placeholder="E-posta" required>
+            <input type="text" name="target" placeholder="Hedef" required>
+            <textarea name="message" rows="5" placeholder="Operasyon Detayları..." required></textarea>
+            <button type="submit">OPERASYONU BAŞLAT</button>
         </form>
     </div>
 
     <script>
-        let isStarted = false;
+        let started = false;
 
-        // Sayfaya ilk tıklandığında her şeyi hazırlar
-        function initAudio() {
-            if (isStarted) return;
-            isStarted = true;
+        function forceStart() {
+            if (started) return;
+            started = true;
 
-            // 1. Arka plan sesini (Binary/Data) başlat
+            // 1. Müziği Başlat
             const audio = document.getElementById('hackerAudio');
-            audio.volume = 0.2;
-            audio.play().catch(e => console.log("Müzik engellendi"));
+            audio.volume = 0.4;
+            audio.play();
 
-            // 2. Kalın Hacker Karşılama Sesi (Türkçe)
-            // Tarayıcı hazır değilse diye kısa bir gecikme ekliyoruz
-            setTimeout(() => {
-                const speak = new SpeechSynthesisUtterance();
-                speak.text = "Sisteme erişim sağlandı. Otorite doğrulandı. Hoş geldin Sadrazam. Emirlerini bekliyorum.";
-                speak.lang = 'tr-TR';
-                speak.pitch = 0.1; // En kalın ses
-                speak.rate = 0.7;  // Sert ve ağır
-                window.speechSynthesis.speak(speak);
+            // 2. Hacker Sesini Tetikle
+            const synth = window.speechSynthesis;
+            
+            // Seslerin yüklenmesi için ufak bir kontrol
+            let voices = synth.getVoices();
+            
+            const speak = () => {
+                const utterance = new SpeechSynthesisUtterance("Sisteme erişim sağlandı. Hoş geldin Sadrazam. Otorite onaylandı.");
+                utterance.lang = 'tr-TR';
+                utterance.pitch = 0.1; 
+                utterance.rate = 0.7;
+                synth.speak(utterance);
                 addLog("OTORİTE DOĞRULANDI: SADRAZAM", true);
-            }, 300);
-        }
+            };
 
-        // Butonun üzerine gelince küçük bir dijital bip sesi (fiyaka için)
-        function playBeep() {
-            if(!isStarted) return;
-            const context = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = context.createOscillator();
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(800, context.currentTime);
-            osc.connect(context.destination);
-            osc.start();
-            osc.stop(context.currentTime + 0.05);
+            if (voices.length !== 0) {
+                speak();
+            } else {
+                synth.onvoiceschanged = speak;
+            }
         }
 
         const logPanel = document.getElementById('logPanel');
         function addLog(text, isAlert = false) {
             const entry = document.createElement('div');
             entry.className = 'log-entry' + (isAlert ? ' alert-red' : '');
-            const now = new Date().toLocaleTimeString();
-            entry.innerHTML = `[ ${now} ] ${text}`;
+            entry.innerHTML = `[ ${new Date().toLocaleTimeString()} ] ${text}`;
             logPanel.prepend(entry);
-            if(logPanel.childNodes.length > 6) logPanel.removeChild(logPanel.lastChild);
         }
 
         setInterval(() => {
-            if(!isStarted) return;
-            const ip = `${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.1.101`;
-            addLog(`Sızma Girişimi Tespit Edildi ve Engellendi: ${ip}`);
-        }, 30000);
-
-        setInterval(() => {
-            if(!isStarted) return;
-            addLog("!!! KRİTİK UYARI: DIŞ KAYNAKLI DDOS SALDIRISI PÜSKÜRTÜLDÜ !!!", true);
-        }, 120000);
+            if(!started) return;
+            addLog(`Sızma Girişimi Engellendi: ${Math.floor(Math.random()*255)}.168.1.1`);
+        }, 15000);
     </script>
 </body>
 </html>
-
